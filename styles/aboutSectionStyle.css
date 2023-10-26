@@ -1,0 +1,70 @@
+.biography {
+    padding-top: 100px;
+    display: flex;
+    margin-bottom: 70px;
+  }
+  
+  .img-biography {
+    height: 75vh;
+    width: auto;
+    border-bottom-right-radius: 100px;
+  }
+  
+  .dateConteiner {
+    display: flex;
+    margin-top: 30px;
+    margin-left: 30px;
+  }
+  
+  .divider {
+    font-size: 1px;
+    align-self: stretch;
+  }
+  
+  .died,
+  .born {
+    font-size: 15px;
+    color: gray;
+  }
+  
+  .date {
+    font-size: 35px;
+  }
+  
+  .city {
+    font-size: 18px;
+    color: gray;
+  }
+  
+  .divisor-conteiner {
+    margin: 20px;
+  }
+  
+  .biography-text-conteiner {
+    margin-left: 100px;
+  }
+  
+  .biography-text-conteiner h1 {
+    font-size: 50px;
+    margin-top: 30px;
+  }
+  
+  .biography-text-conteiner p {
+    font-size: 20px;
+    margin-right: 200px;
+    color: gray;
+  }
+  
+  .bookConteiner {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 20px;
+  }
+  
+  .book-image {
+    box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.5);
+    height: 250px;
+    width: 167.25px;
+    margin-right: 30px;
+    border-radius: 20px;
+  }

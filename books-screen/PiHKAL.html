@@ -3,29 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        border: 0;
-        box-sizing: border-box;
-        vertical-align: baseline;
-        text-decoration: none;
-      }
-
-      .hidden {
-        display: none;
-      }
-      .book-image {
-        min-width: 550px;
-        border-bottom-right-radius: 100px;
-        box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.5);
-      }
-
-      p {
-        font-size: 20px;
-      }
-    </style>
+    <link rel="stylesheet" href="stylesBooks.css" />
     <title>Información del Libro</title>
   </head>
   <body>
@@ -33,16 +11,13 @@
       <h1 id="loadingMessage">Cargando...</h1>
       <div style="display: flex">
         <img
-          src="../images//books/81YDCDSU8RL._AC_UF1000,1000_QL80_.jpg"
+          src="../images/books/pihkal.jpg"
           alt=""
           class="book-image hidden"
         />
-        <div style="margin-left: 100px; margin-right: 400px">
+        <div class="textConteiner">
           <h1 id="title" class="hidden" style="font-size: 50px"></h1>
-          <p
-            style="font-size: 20px; color: gray; margin-bottom: 10px"
-            class="hidden"
-          >
+          <p class="description hidden">
             "PiHKAL: A Chemical Love Story" es un libro escrito por Alexander
             Shulgin y Ann Shulgin. Esta obra combina autobiografía con una
             enciclopedia de compuestos químicos, centrándose en triptaminas.
@@ -52,33 +27,33 @@
             cuestiones éticas y de seguridad en relación con su uso.
           </p>
           <div style="display: flex; flex-wrap: wrap">
-            <div style="margin-bottom: 10px; display: flex; margin-right: 10px">
+            <div class="pConteiner">
               <p id="" class="hidden">Número de páginas:</p>
-              <p id="numberOfPages" class="hidden"></p>
+              <p id="numberOfPages" class="apiData hidden"></p>
             </div>
-            <div style="margin-bottom: 10px; display: flex; margin-right: 10px">
+            <div class="pConteiner">
               <p id="" class="hidden">Fecha de publicación:</p>
-              <p id="publishDate" class="hidden"></p>
+              <p id="publishDate" class="apiData hidden"></p>
             </div>
-            <div style="margin-bottom: 10px; display: flex; margin-right: 10px">
+            <div class="pConteiner">
               <p id="" class="hidden">Idiomas:</p>
-              <p id="languages" class="hidden"></p>
+              <p id="languages" class="apiData hidden"></p>
             </div>
-            <div style="margin-bottom: 10px; display: flex; margin-right: 10px">
+            <div class="pConteiner">
               <p id="" class="hidden">Dimensiones físicas:</p>
-              <p id="physicalDimensions" class="hidden"></p>
+              <p id="physicalDimensions" class="apiData hidden"></p>
             </div>
-            <div style="margin-bottom: 10px; display: flex; margin-right: 10px">
+            <div class="pConteiner">
               <p id="" class="hidden">Peso:</p>
-              <p id="weight" class="hidden"></p>
+              <p id="weight" class="apiData hidden"></p>
             </div>
-            <div style="margin-bottom: 10px; display: flex; margin-right: 10px">
+            <div class="pConteiner">
               <p id="" class="hidden">Autores:</p>
-              <p id="authorName" class="hidden"></p>
+              <p id="authorName" class="apiData hidden"></p>
             </div>
-            <div style="margin-bottom: 10px; display: flex; margin-right: 10px">
+            <div class="pConteiner">
               <p id="" class="hidden">Temas:</p>
-              <p id="subjects" class="hidden"></p>
+              <p id="subjects" class="apiData hidden"></p>
             </div>
           </div>
         </div>
@@ -87,12 +62,14 @@
 
     <script>
       // URL de la API original
-      const apiUrl = "https://openlibrary.org/works/OL22859055M.json";
+      const apiUrl =
+        "https://corsproxy.io/?" +
+        encodeURIComponent("https://openlibrary.org/works/OL22859055M.json");
 
       // Hacer la solicitud a la API para obtener la información del libro
       fetch(apiUrl)
         .then((response) => {
-          console.log(response)
+          console.log(response);
           if (!response.ok) {
             throw new Error("La solicitud a la API no tuvo éxito");
           }

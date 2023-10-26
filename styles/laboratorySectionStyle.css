@@ -1,0 +1,97 @@
+.laboratory {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #f2f0d5;
+    align-content: center;
+  }
+  
+  .laboratory h1 {
+    margin-bottom: 60px;
+    margin-top: 60px;
+    font-size: 50px;
+  }
+  
+  .laboratory video {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+  }
+  
+  .content-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .laboratory-text-conteiner {
+    width: 40%;
+    margin: 0 60px;
+    text-align: start;
+  }
+  
+  .laboratory-text-conteiner p {
+    font-size: 20px;
+  }
+  
+  .carrousel {
+    width: auto;
+    max-width: 50%;
+    padding: 2em;
+    transition: all 0.4s ease;
+    border-radius: 1em;
+    overflow: hidden;
+  }
+  
+  .carrousel .grande {
+    height: auto;
+    width: 1500%;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.4s ease;
+    border-radius: 1em;
+    transition: all 0.5s ease;
+    transform: translateX(0%);
+  }
+  
+  .img, iframe {
+    width: calc(100% / 15 - 1em);
+    aspect-ratio: 16 / 9;
+    transition: all 0.4s ease;
+    border-radius: 1em;
+  }
+  
+  .carrousel .puntos {
+    width: 100%;
+    margin: 1em 0 0;
+    padding: 0.4em;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+  }
+  
+  .carrousel .punto {
+    width: 23px;
+    height: 23px;
+    margin: 1.5% 1.5% 0;
+    transition: all 0.4s ease;
+    border-radius: 1em;
+    border: 1px solid #f2f0d5;
+  }
+  
+  .carrousel .punto.activo {
+    background-color: #f2f0d5;
+  }
+  
+  .laboratory-text-conteiner a {
+    color: #f2bf27;
+  }
