@@ -1,0 +1,123 @@
+#contacto{
+  margin: 0px 0px 120px 0px;
+}
+
+.contact-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 5rem;
+  }
+
+  .inner-container {
+    width: 100%;
+    max-width: 58rem;
+    padding: 0.75rem;
+    text-align: center;
+    flex: none;
+  }
+  
+  .contact-heading {
+    font-weight: 400;
+    color: #024059;
+    font-size: 3rem;
+    line-height: 1.125;
+    word-break: break-word;
+  }
+  
+  .form-container {
+    max-width: 85%;
+    margin: 0 auto;
+    margin-top: 6rem;
+  }
+  
+  .column-form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+  }
+  
+  .column-half {
+    margin-bottom: 1rem;
+    text-align: left;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 2.5rem;
+  }
+  
+  label {
+    font-weight: 400;
+    font-size: 1.2rem;
+    color: #024059;
+    text-align: left;
+    width: 100%;
+  }
+  
+  .input {
+    margin-top: 0.5rem;
+    font-size: 1.4rem;
+    color: #8C7C5E;
+    max-width: 100%;
+    width: 100%;
+    border: 1px solid #024059;
+    border-radius: 4px;
+    line-height: 1.5;
+    padding: 0.5em;
+    font-family: "europa", sans-serif;
+    resize: vertical;
+  }
+  
+  #message{
+    height: 6.4rem;
+  }
+  
+  .submit-button {
+    background-color: transparent;
+    padding: 1rem 3rem;
+    width: 9rem;
+    color: #024059;
+    cursor: pointer;
+    font-family: "europa", sans-serif;
+    transition: .4s ease;
+    margin: 3rem;
+      border: 2px solid #024059 ;
+      font-weight: 400;
+      font-size: 1.25rem;
+      border-radius: 9999px;
+      padding-left: 1.25em;
+      padding-right: 1.25em;
+  }
+  
+  .submit-button:hover{
+    background-color: #024059;
+    color: white;
+  }
+  
+  @media (max-width: 875px) {
+    .column-form {
+      flex-direction: column;
+    }
+  
+    .column-half {
+      flex-basis: 100%;
+    }
+  
+    .contact-heading{
+      font-size: 2.5rem;
+    }
+  }
+
+  .error {
+    border: 1px solid red;
+  }
+  
+  /* Estilo para mensajes de error */
+  .error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+  }

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        box-sizing: border-box;
+        vertical-align: baseline;
+        text-decoration: none;
+      }
+
+      .hidden {
+        display: none;
+      }
+      .book-image {
+        min-width: 550px;
+        border-bottom-right-radius: 100px;
+        box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.5);
+      }
+
+      p {
+        font-size: 20px;
+      }
+    </style>
+    <title>Información del Libro</title>
+  </head>
+  <body>
+    <div id="bookInfo">
+      <h1 id="loadingMessage">Cargando...</h1>
+      <div style="display: flex">
+        <img
+          src="../images//books/81YDCDSU8RL._AC_UF1000,1000_QL80_.jpg"
+          alt=""
+          class="book-image hidden"
+        />
+        <div style="margin-left: 100px; margin-right: 400px">
+          <h1 id="title" class="hidden" style="font-size: 50px"></h1>
+          <p
+            style="font-size: 20px; color: gray; margin-bottom: 10px"
+            class="hidden"
+          >
+            "PiHKAL: A Chemical Love Story" es un libro escrito por Alexander
+            Shulgin y Ann Shulgin. Esta obra combina autobiografía con una
+            enciclopedia de compuestos químicos, centrándose en triptaminas.
+            Ofrece una mirada única a las experiencias personales de los autores
+            con sustancias psicodélicas y proporciona información detallada
+            sobre la química y los efectos de estas sustancias. También aborda
+            cuestiones éticas y de seguridad en relación con su uso.
+          </p>
+          <div style="display: flex; flex-wrap: wrap">
+            <div style="margin-bottom: 10px; display: flex; margin-right: 10px">
+              <p id="" class="hidden">Número de páginas:</p>
+              <p id="numberOfPages" class="hidden"></p>
+            </div>
+            <div style="margin-bottom: 10px; display: flex; margin-right: 10px">
+              <p id="" class="hidden">Fecha de publicación:</p>
+              <p id="publishDate" class="hidden"></p>
+            </div>
+            <div style="margin-bottom: 10px; display: flex; margin-right: 10px">
+              <p id="" class="hidden">Idiomas:</p>
+              <p id="languages" class="hidden"></p>
+            </div>
+            <div style="margin-bottom: 10px; display: flex; margin-right: 10px">
+              <p id="" class="hidden">Dimensiones físicas:</p>
+              <p id="physicalDimensions" class="hidden"></p>
+            </div>
+            <div style="margin-bottom: 10px; display: flex; margin-right: 10px">
+              <p id="" class="hidden">Peso:</p>
+              <p id="weight" class="hidden"></p>
+            </div>
+            <div style="margin-bottom: 10px; display: flex; margin-right: 10px">
+              <p id="" class="hidden">Autores:</p>
+              <p id="authorName" class="hidden"></p>
+            </div>
+            <div style="margin-bottom: 10px; display: flex; margin-right: 10px">
+              <p id="" class="hidden">Temas:</p>
+              <p id="subjects" class="hidden"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // URL de la API original
+      const apiUrl = "https://openlibrary.org/works/OL22859055M.json";
+
+      // Hacer la solicitud a la API para obtener la información del libro
+      fetch(apiUrl)
+        .then((response) => {
+          console.log(response)
+          if (!response.ok) {
+            throw new Error("La solicitud a la API no tuvo éxito");
+          }
+          return response.json();
+        })
+        .then((bookData) => {
+          // Asignar valores a los elementos del DOM
+          document.getElementById(
+            "title"
+          ).textContent = ` ${bookData.title}: ${bookData.subtitle}`;
+          document.getElementById("numberOfPages").textContent = ` ${
+            bookData.number_of_pages
+              ? bookData.number_of_pages
+              : "No especificado"
+          }`;
+          document.getElementById("publishDate").textContent = ` ${
+            bookData.publish_date ? bookData.publish_date : "No especificado"
+          }`;
+
+          // Mostrar solo el código del idioma
+          const languages = bookData.languages.map((lang) =>
+            lang.key.split("/").pop()
+          );
+          document.getElementById("languages").textContent = ` ${languages.join(
+            ", "
+          )}`;
+
+          document.getElementById("physicalDimensions").textContent = ` ${
+            bookData.physical_dimensions
+              ? bookData.physical_dimensions
+              : "No especificado"
+          }`;
+          document.getElementById("weight").textContent = ` ${
+            bookData.weight ? bookData.weight : "No especificado"
+          }`;
+          document.getElementById(
+            "subjects"
+          ).textContent = ` ${bookData.subjects.join(", ")}`;
+
+          // Acceder a la información de los autores
+          const authors = bookData.authors;
+          const authorPromises = [];
+          const authorNames = [];
+
+          authors.forEach((author) => {
+            const authorKey = author.key;
+            const authorUrl = `https://openlibrary.org${authorKey}.json`;
+            authorPromises.push(
+              fetch(authorUrl)
+                .then((response) => {
+                  if (!response.ok) {
+                    throw new Error(
+                      "La solicitud a la API del autor no tuvo éxito"
+                    );
+                  }
+                  return response.json();
+                })
+                .then((authorData) => {
+                  // Agregar el nombre del autor al array
+                  authorNames.push(authorData.name);
+                })
+                .catch((error) => {
+                  console.error(
+                    "Error al obtener información del autor:",
+                    error
+                  );
+                })
+            );
+          });
+
+          // Procesar todas las promesas de solicitudes a la API de autores
+          Promise.all(authorPromises)
+            .then((authorDataArray) => {
+              // Mostrar todos los nombres de los autores
+              const authorNamesString = authorNames.join(", ");
+              const pAuthorName = document.getElementById("authorName");
+              pAuthorName.textContent = `${authorNamesString}`;
+
+              // Ocultar el mensaje de "Cargando"
+              document.getElementById("loadingMessage").style.display = "none";
+
+              // Mostrar elementos ocultos
+              const hiddenElements = document.querySelectorAll(".hidden");
+              hiddenElements.forEach((element) => {
+                element.style.display = "block";
+              });
+            })
+            .catch((error) => {
+              console.error(
+                "Error al obtener información de los autores:",
+                error
+              );
+            });
+        })
+        .catch((error) => {
+          console.error("Error al obtener la información del libro:", error);
+        });
+    </script>
+  </body>
+</html>
