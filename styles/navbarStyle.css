@@ -12,6 +12,7 @@
     padding: 20px;
     margin-left: 20px;
     transition: padding 0.4s ease;
+    display: flex;
   }
   
   .navbar.scroll {
